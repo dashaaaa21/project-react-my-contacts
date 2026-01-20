@@ -12,7 +12,15 @@ export const getContacts = async (req, res) => {
 
 export const createContact = async (req, res) => {
   try {
+    console.log('Creating contact with data:', req.body);
+    console.log('User ID:', req.userId);
+    
     const { firstName, lastName, phone, email, avatar, gender, status, favorite } = req.body;
+
+    if (!firstName || !lastName || !phone || !email || !gender || !status) {
+      console.log('Missing required fields');
+      return res.status(400).json({ message: 'All required fields must be provided' });
+    }
 
     const contact = await Contact.create({
       userId: req.userId,
@@ -26,10 +34,11 @@ export const createContact = async (req, res) => {
       favorite,
     });
 
+    console.log('Contact created successfully:', contact._id);
     return res.status(201).json(contact);
   } catch (error) {
-    console.error('Create contact error', error);
-    return res.status(500).json({ message: 'Server error' });
+    console.error('Create contact error:', error);
+    return res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
 
