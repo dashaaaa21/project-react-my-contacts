@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { logoutUser } from '../../redux/authSlice';
 import { getUserFirstLetterForAvatar, getUserNameForGreeting } from '../../utils/userUtils';
@@ -6,6 +6,7 @@ import { getUserFirstLetterForAvatar, getUserNameForGreeting } from '../../utils
 export default function Header() {
     const auth = useAppSelector(state => state.auth);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const user = auth.user;
     
     return (
@@ -29,9 +30,9 @@ export default function Header() {
                 </div>
 
                 <nav className="flex flex-wrap items-center gap-4 md:gap-10 text-gray-300 justify-center">
-                    <Link to="/" className="text-white hover:text-white transition">Contact List</Link>
-                    <Link to="/new-contact" className="hover:text-white transition">New Contact</Link>
-                    <Link to="/contact-statuses" className="hover:text-white transition">Statuses</Link>
+                    <button onClick={() => navigate('/')} className="text-white hover:text-white transition">Contact List</button>
+                    <button onClick={() => navigate('/new-contact')} className="hover:text-white transition">New Contact</button>
+                    <button onClick={() => navigate('/contact-statuses')} className="hover:text-white transition">Statuses</button>
                 </nav>
 
                 <div className="flex items-center gap-3 md:gap-4 flex-wrap justify-center">
@@ -43,12 +44,12 @@ export default function Header() {
                         </button>
                     ) : (
                         <>
-                            <Link to="/login" className="bg-lime-300 text-black px-4 md:px-6 py-2 rounded-full font-medium hover:bg-lime-200 transition">
+                            <button onClick={() => navigate('/login')} className="bg-lime-300 text-black px-4 md:px-6 py-2 rounded-full font-medium hover:bg-lime-200 transition">
                                 Sign in
-                            </Link>
-                            <Link to="/register" className="bg-lime-900 text-white px-4 md:px-6 py-2 rounded-full font-medium hover:bg-lime-600 transition">
+                            </button>
+                            <button onClick={() => navigate('/register')} className="bg-lime-900 text-white px-4 md:px-6 py-2 rounded-full font-medium hover:bg-lime-600 transition">
                                 Register
-                            </Link>
+                            </button>
                         </>
                     )}
                 </div>

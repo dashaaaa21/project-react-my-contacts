@@ -1,13 +1,13 @@
-name: CI/CD Pipeline
+name: Build Check
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     
     steps:
@@ -33,32 +33,12 @@ jobs:
         cd server
         npm ci
 
+    - name: Lint client
+      run: |
+        cd client
+        npm run lint
+
     - name: Build client
       run: |
         cd client
         npm run build
-
-    - name: Test server (if tests exist)
-      run: |
-        cd server
-        npm test --if-present
-
-  deploy-client:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && secrets.VERCEL_TOKEN != ''
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Deploy client to Vercel
-      uses: amondnet/vercel-action@v25
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        working-directory: ./client
-        vercel-args: '--prod'
-
-

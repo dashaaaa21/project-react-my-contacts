@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Welcome() {
+    const navigate = useNavigate();
+    
     return (
         <div className="relative min-h-screen overflow-hidden">
             
@@ -18,19 +20,19 @@ export default function Welcome() {
                     
                     <div className="space-y-6">
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link 
-                                to="/login"
+                            <button 
+                                onClick={() => navigate('/login')}
                                 className="bg-lime-400 hover:bg-lime-300 text-black font-bold text-xl px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl text-center"
                             >
                                 Sign In
-                            </Link>
+                            </button>
                             
-                            <Link 
-                                to="/register"
+                            <button 
+                                onClick={() => navigate('/register')}
                                 className="bg-white hover:bg-gray-100 text-black font-bold text-xl px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-white text-center"
                             >
                                 Register
-                            </Link>
+                            </button>
                         </div>
                         
                         <div className="text-center text-white">

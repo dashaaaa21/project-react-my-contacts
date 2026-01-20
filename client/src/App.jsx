@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
-import {useContext, useEffect, useState} from 'react';
+import { useEffect } from 'react';
 import { store } from './redux/store';
 import { useAppSelector, useAppDispatch } from './redux/hooks';
 import { fetchContacts, fetchStatuses } from './redux/contactsSlice';

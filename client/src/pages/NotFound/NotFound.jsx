@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotFound() {
+    const navigate = useNavigate();
+    
     return (
         <main className="relative w-full min-h-screen bg-gray-100 flex flex-col lg:flex-row">
             <div className="hidden lg:flex w-16 bg-white border-r-2 border-gray-300 items-center justify-center">
@@ -32,12 +34,12 @@ export default function NotFound() {
                         Please go back to the home page.
                     </p>
 
-                    <Link 
-                        to="/" 
+                    <button 
+                        onClick={() => navigate('/')}
                         className="inline-block bg-lime-400 text-black px-10 sm:px-16 py-3 sm:py-4 rounded-full font-bold uppercase tracking-wide hover:bg-lime-500 transition-colors text-sm sm:text-base"
                     >
                         Go Home
-                    </Link>
+                    </button>
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { removeStatus } from '../../redux/contactsSlice';
 
@@ -6,6 +6,7 @@ export default function ContactsStatuses() {
     const contactStatuses = useAppSelector(state => state.contacts.contactStatuses);
     const loading = useAppSelector(state => state.contacts.loading);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     if (loading) {
         return <div className="p-6 text-xl">Loading statuses...</div>;
@@ -29,12 +30,12 @@ export default function ContactsStatuses() {
                 <div className="max-w-6xl mx-auto">
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-3xl sm:text-4xl font-bold text-black">Contact Statuses</h1>
-                        <Link 
-                            to="/contact-statuses/add-contact-status" 
+                        <button 
+                            onClick={() => navigate('/contact-statuses/add-contact-status')}
                             className="bg-lime-400 text-black px-6 py-3 rounded-full font-bold uppercase tracking-wide hover:bg-lime-500 transition-colors"
                         >
                             ADD STATUS
-                        </Link>
+                        </button>
                     </div>
 
                     <div className="overflow-x-auto">
@@ -62,11 +63,11 @@ export default function ContactsStatuses() {
                                         <td className="px-6 py-4 text-center text-gray-900">{contactStatuses[status].count}</td>
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex gap-2 justify-center">
-                                                <Link to={`/contact-statuses/edit-contact-status/${status}`}>
-                                                    <button className="px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded hover:bg-blue-200 transition-colors">
-                                                        Edit
-                                                    </button>
-                                                </Link>
+                                                <button 
+                                                    onClick={() => navigate(`/contact-statuses/edit-contact-status/${status}`)}
+                                                    className="px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded hover:bg-blue-200 transition-colors">
+                                                    Edit
+                                                </button>
                                                 {status !== 'others' && (
                                                     <button 
                                                         onClick={() => {
@@ -89,12 +90,12 @@ export default function ContactsStatuses() {
                     </div>
 
                     <div className="mt-8">
-                        <Link 
-                            to="/" 
+                        <button 
+                            onClick={() => navigate('/')}
                             className="inline-block bg-lime-400 text-black px-8 py-3 rounded-full font-bold uppercase tracking-wide hover:bg-lime-500 transition-colors"
                         >
                             BACK
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>

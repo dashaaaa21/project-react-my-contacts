@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { removeContact } from "../../redux/contactsSlice";
 
@@ -6,6 +6,7 @@ export default function ContactItem() {
     const contacts = useAppSelector(state => state.contacts.contacts);
     const search = useAppSelector(state => state.contacts.search);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     
     const searchText = search ? search.toLowerCase() : '';
     
@@ -64,11 +65,11 @@ export default function ContactItem() {
                             <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-gray-600">{contact.status}</td>
                             <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
                                 <div className="flex gap-1 sm:gap-2">
-                                    <Link to={`/update-contact/${contact.id}`}>
-                                        <button className="px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded hover:bg-blue-200 transition-colors">
-                                            Edit
-                                        </button>
-                                    </Link>
+                                    <button 
+                                        onClick={() => navigate(`/update-contact/${contact.id}`)}
+                                        className="px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded hover:bg-blue-200 transition-colors">
+                                        Edit
+                                    </button>
                                     <button
                                         onClick={() => handleDelete(contact.id)}
                                         className="px-3 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded hover:bg-red-200 transition-colors"
