@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ export default function NewContact() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const contactStatuses = useAppSelector(state => state.contacts.contactStatuses);
-    const randomAvatar = useMemo(() => Math.floor(Math.random() * 99) + 1, []);
+    const [randomAvatar] = useState(() => Math.floor(Math.random() * 99) + 1);
 
     const initialValues = {
         id: uuidv4(),
