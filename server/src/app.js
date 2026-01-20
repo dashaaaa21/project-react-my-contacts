@@ -20,7 +20,7 @@ const corsOptions = {
       return callback(null, true);
     }
     
-    if (origin && origin.includes('onrender.com')) {
+    if (origin && origin.includes('render.com')) {
       return callback(null, true);
     }
     
